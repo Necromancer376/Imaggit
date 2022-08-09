@@ -1,10 +1,8 @@
 package com.example.memeshare
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.graphics.drawable.Drawable
-import android.hardware.input.InputManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -65,7 +63,7 @@ class MainActivity : AppCompatActivity() {
         val textView = findViewById<TextView>(R.id.text)
         val imgMeme = findViewById<ImageView>(R.id.imgMeme)
         // Instantiate the RequestQueue.
-        val url = "https://meme-api.herokuapp.com/gimme/" + subreddit
+        val url = "https://meme-api.herokuapp.com/gimme/$subreddit"
 
         // Request a string response from the provided URL.
         val jsonObjectRequest = JsonObjectRequest(
