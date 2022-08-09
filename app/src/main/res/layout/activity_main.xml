@@ -70,7 +70,10 @@
         app:layout_constraintBottom_toBottomOf="@id/imgMeme"
         app:layout_constraintLeft_toLeftOf="@id/imgMeme"
         app:layout_constraintRight_toRightOf="@id/imgMeme"
-        app:layout_constraintTop_toTopOf="@id/imgMeme" />
+        app:layout_constraintTop_toTopOf="@id/imgMeme"
+        android:indeterminate="true"
+        android:indeterminateTintMode="src_atop"
+        android:indeterminateTint="#ddfa39"/>
 
         <Button
             android:id="@+id/btnShare"
