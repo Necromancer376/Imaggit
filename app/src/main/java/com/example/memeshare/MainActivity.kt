@@ -9,7 +9,6 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
 import android.widget.ProgressBar
-import android.widget.TextView
 import com.android.volley.Request
 import com.android.volley.toolbox.JsonObjectRequest
 import com.bumptech.glide.Glide
@@ -50,7 +49,7 @@ class MainActivity : AppCompatActivity() {
     private fun loadMeme() {
         val progressBar = findViewById<ProgressBar>(R.id.progressBar)
         progressBar.visibility = View.VISIBLE
-        
+
         val imgMeme = findViewById<ImageView>(R.id.imgMeme)
         // Instantiate the RequestQueue.
         val url = "https://meme-api.herokuapp.com/gimme/$subreddit"
@@ -92,7 +91,7 @@ class MainActivity : AppCompatActivity() {
 
     fun shareMeme(view: android.view.View) {
 
-        var intent = Intent(Intent.ACTION_SEND)
+        val intent = Intent(Intent.ACTION_SEND)
         intent.type = "text/plain"
         intent.putExtra(Intent.EXTRA_TEXT, "Check this meme, lol $currentImageUrl")
         val chooser = Intent.createChooser(intent, "share using...")
