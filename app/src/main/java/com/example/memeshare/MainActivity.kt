@@ -30,6 +30,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         btnChange.setOnClickListener { chageSubreddit() }
+        imgStar.setOnClickListener { addToStarred() }
         edtSubreddit.setSelectAllOnFocus(true)
 
         loadMeme()
@@ -100,5 +101,9 @@ class MainActivity : AppCompatActivity() {
 
     fun nextMeme(view: android.view.View) {
         loadMeme()
+    }
+
+    private fun addToStarred() {
+        TODO("Not yet implemented")
     }
 }
