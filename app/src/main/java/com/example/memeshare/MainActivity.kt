@@ -30,12 +30,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-//        arrayList.add("me_irl")
-//        arrayList.add("memes")
-//        arrayList.add("wholesomememes")
-//        arrayList.add("dankmemes")
-//        arrayList.add("me_irl")
-
         btnChange.setOnClickListener { chageSubreddit() }
         edtSubreddit.setSelectAllOnFocus(true)
 
@@ -56,7 +50,7 @@ class MainActivity : AppCompatActivity() {
     private fun loadMeme() {
         val progressBar = findViewById<ProgressBar>(R.id.progressBar)
         progressBar.visibility = View.VISIBLE
-        val textView = findViewById<TextView>(R.id.text)
+        
         val imgMeme = findViewById<ImageView>(R.id.imgMeme)
         // Instantiate the RequestQueue.
         val url = "https://meme-api.herokuapp.com/gimme/$subreddit"
