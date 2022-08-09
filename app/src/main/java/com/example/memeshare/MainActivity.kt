@@ -1,10 +1,14 @@
 package com.example.memeshare
 
+import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import android.graphics.drawable.Drawable
+import android.hardware.input.InputManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
@@ -19,16 +23,40 @@ import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import com.example.sharememes.MySingleton
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
     var currentImageUrl: String? = null
 
+    var arrayList = ArrayList<String>()
+    var subreddit = ""
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+//        arrayList.add("me_irl")
+//        arrayList.add("memes")
+//        arrayList.add("wholesomememes")
+//        arrayList.add("dankmemes")
+//        arrayList.add("me_irl")
+
+        btnChange.setOnClickListener { chageSubreddit() }
+        edtSubreddit.setSelectAllOnFocus(true)
+
         loadMeme()
+    }
+
+    private fun chageSubreddit() {
+        subreddit = edtSubreddit.text.toString()
+        hideKeyboard(currentFocus ?: View(this@MainActivity))
+        loadMeme()
+    }
+
+    fun Context.hideKeyboard(view: View) {
+        val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(view.windowToken, 0)
     }
 
     private fun loadMeme() {
@@ -37,7 +65,7 @@ class MainActivity : AppCompatActivity() {
         val textView = findViewById<TextView>(R.id.text)
         val imgMeme = findViewById<ImageView>(R.id.imgMeme)
         // Instantiate the RequestQueue.
-        val url = "https://meme-api.herokuapp.com/gimme"
+        val url = "https://meme-api.herokuapp.com/gimme/" + subreddit
 
         // Request a string response from the provided URL.
         val jsonObjectRequest = JsonObjectRequest(
