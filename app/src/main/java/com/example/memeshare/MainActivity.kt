@@ -24,6 +24,8 @@ class MainActivity : AppCompatActivity() {
     var currentImageUrl: String? = null
 
     var subreddit = ""
+    var starredItems = ArrayList<String>()
+    var toggleStar = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -83,6 +85,13 @@ class MainActivity : AppCompatActivity() {
                         return false
                     }
                 }).into(imgMeme)
+                imgStar.setImageResource(R.drawable.ic_star_hollow)
+                toggleStar = false
+
+                if(starredItems.contains(currentImageUrl)) {
+                    imgStar.setImageResource(R.drawable.ic_star_filled)
+
+                }
             },
             { })
 
@@ -104,6 +113,15 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun addToStarred() {
-        TODO("Not yet implemented")
+
+        starredItems.add(currentImageUrl.toString())
+        if(!toggleStar) {
+            imgStar.setImageResource(R.drawable.ic_star_filled)
+            toggleStar = true
+        }
+        else {
+            imgStar.setImageResource(R.drawable.ic_star_hollow)
+            toggleStar = false
+        }
     }
 }
