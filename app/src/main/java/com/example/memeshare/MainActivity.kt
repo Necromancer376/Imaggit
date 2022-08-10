@@ -1,5 +1,6 @@
 package com.example.memeshare
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
@@ -19,15 +20,12 @@ import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import com.example.sharememes.MySingleton
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
 import kotlinx.android.synthetic.main.activity_main.*
-import java.lang.reflect.Type
-import kotlin.math.log
+
 
 class MainActivity : AppCompatActivity() {
 
-    val key_starred: String = "STARRED"
+    val keyStarred: String = "STARRED"
     var currentImageUrl: String? = null
 
     var subreddit = ""
@@ -42,7 +40,7 @@ class MainActivity : AppCompatActivity() {
         imgStar.setOnClickListener { addToStarred() }
         edtSubreddit.setSelectAllOnFocus(true)
 
-        starredItems = getStarredArray(key_starred)
+        starredItems = getStarredArray(keyStarred)
         loadMeme()
     }
 
@@ -126,16 +124,17 @@ class MainActivity : AppCompatActivity() {
             imgStar.setImageResource(R.drawable.ic_star_filled)
             starredItems.add(currentImageUrl.toString())
             toggleStar = true
-            saveStarredArray(starredItems, key_starred)
+            saveStarredArray(starredItems, keyStarred)
         }
         else {
             imgStar.setImageResource(R.drawable.ic_star_hollow)
             starredItems.remove(currentImageUrl)
             toggleStar = false
-            saveStarredArray(starredItems, key_starred)
+            saveStarredArray(starredItems, keyStarred)
         }
     }
 
+    @SuppressLint("CommitPrefEdits")
     fun saveStarredArray(list: ArrayList<String>, key: String?) {
         val sharedPreferences = getSharedPreferences("starredImages", Context.MODE_PRIVATE)
         val editor = sharedPreferences.edit()
@@ -158,7 +157,7 @@ class MainActivity : AppCompatActivity() {
         val value = getString(key, null)
         if (value.isNullOrBlank())
             return defValue
-        return ArrayList (value.split(",").map { it.toString()})
+        return ArrayList (value.split(",").map { it })
     }
 
     fun logStarred() {
