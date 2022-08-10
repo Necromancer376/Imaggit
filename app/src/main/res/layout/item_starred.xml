@@ -4,11 +4,24 @@
     android:layout_height="wrap_content"
     android:layout_margin="1dp">
 
+<!--    <FrameLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:background="@drawable/backgroud_starred">-->
+<!--        <ImageView-->
+<!--            android:id="@+id/imgItemStarred"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:background="@drawable/backgroud_starred"-->
+<!--            android:scaleType="fitXY"/>-->
+<!--    </FrameLayout>-->
+
     <ImageView
         android:id="@+id/imgItemStarred"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:src="@drawable/backgroud_starred"
+        android:background="@drawable/backgroud_starred"
+        android:adjustViewBounds="true"
         android:scaleType="fitXY"/>
 
 </RelativeLayout>
