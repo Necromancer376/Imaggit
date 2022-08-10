@@ -40,6 +40,7 @@
             android:layout_weight="20"
             android:layout_marginHorizontal="5dp"
             android:selectAllOnFocus="true"
+            android:textColor="@color/white"
             android:singleLine="true"/>
 
         <ImageView

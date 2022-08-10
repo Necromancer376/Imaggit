@@ -2,9 +2,11 @@ package com.example.memeshare
 
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.graphics.drawable.Drawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
@@ -17,10 +19,15 @@ import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import com.example.sharememes.MySingleton
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import kotlinx.android.synthetic.main.activity_main.*
+import java.lang.reflect.Type
+import kotlin.math.log
 
 class MainActivity : AppCompatActivity() {
 
+    val key_starred: String = "STARRED"
     var currentImageUrl: String? = null
 
     var subreddit = ""
@@ -35,6 +42,7 @@ class MainActivity : AppCompatActivity() {
         imgStar.setOnClickListener { addToStarred() }
         edtSubreddit.setSelectAllOnFocus(true)
 
+        starredItems = getStarredArray(key_starred)
         loadMeme()
     }
 
@@ -114,14 +122,48 @@ class MainActivity : AppCompatActivity() {
 
     private fun addToStarred() {
 
-        starredItems.add(currentImageUrl.toString())
         if(!toggleStar) {
             imgStar.setImageResource(R.drawable.ic_star_filled)
+            starredItems.add(currentImageUrl.toString())
             toggleStar = true
+            saveStarredArray(starredItems, key_starred)
         }
         else {
             imgStar.setImageResource(R.drawable.ic_star_hollow)
+            starredItems.remove(currentImageUrl)
             toggleStar = false
+            saveStarredArray(starredItems, key_starred)
+        }
+    }
+
+    fun saveStarredArray(list: ArrayList<String>, key: String?) {
+        val sharedPreferences = getSharedPreferences("starredImages", Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.putStringArrayList(key!!, list)
+    }
+
+    fun getStarredArray(key: String?): ArrayList<String> {
+        val sharedPreferences = getSharedPreferences("starredImages", Context.MODE_PRIVATE)
+        val defaultArray = ArrayList<String>()
+
+        return sharedPreferences.getStringArrayList(key!!, defaultArray)!!
+    }
+
+    fun SharedPreferences.Editor.putStringArrayList(key: String, list: ArrayList<String>?): SharedPreferences.Editor {
+        putString(key, list?.joinToString(",") ?: "")
+        return this
+    }
+
+    fun SharedPreferences.getStringArrayList(key: String, defValue: ArrayList<String>?): ArrayList<String>? {
+        val value = getString(key, null)
+        if (value.isNullOrBlank())
+            return defValue
+        return ArrayList (value.split(",").map { it.toString()})
+    }
+
+    fun logStarred() {
+        for(i in 0..starredItems.size-1) {
+            Log.e(i.toString(), starredItems[i])
         }
     }
 }
