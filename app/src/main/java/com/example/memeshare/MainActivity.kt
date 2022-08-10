@@ -36,12 +36,28 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        setupActionBar()
+
         btnChange.setOnClickListener { chageSubreddit() }
+        btnSeeStarred.setOnClickListener {
+            startActivity(Intent(this@MainActivity,  StarredImagesActivity::class.java))
+        }
         imgStar.setOnClickListener { addToStarred() }
         edtSubreddit.setSelectAllOnFocus(true)
 
         starredItems = getStarredArray(keyStarred)
         loadMeme()
+    }
+
+    private fun setupActionBar() {
+
+        setSupportActionBar(toolbar_main_activity)
+        val actionbar = supportActionBar
+        if(actionbar != null) {
+            actionbar.setDisplayHomeAsUpEnabled(true)
+            actionbar.setHomeAsUpIndicator(R.drawable.ic_back_button_image)
+        }
+        toolbar_main_activity.setNavigationOnClickListener{ onBackPressed() }
     }
 
     private fun chageSubreddit() {
@@ -134,7 +150,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    @SuppressLint("CommitPrefEdits")
+//    @SuppressLint("CommitPrefEdits")
     fun saveStarredArray(list: ArrayList<String>, key: String?) {
         val sharedPreferences = getSharedPreferences("starredImages", Context.MODE_PRIVATE)
         val editor = sharedPreferences.edit()
