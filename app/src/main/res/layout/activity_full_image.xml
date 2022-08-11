@@ -4,23 +4,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".StarredImagesActivity"
-    android:background="#111111"
-    android:layout_gravity="center|top"
-    android:gravity="center|top">
+    tools:context=".FullImageActivity"
+    android:background="#111111">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar_starred_images_activity"
+        android:id="@+id/toolbar_full_image_activity"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/black" >
+        android:background="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
     </androidx.appcompat.widget.Toolbar>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_starred"
+    <ImageView
+        android:id="@+id/imgFull"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center|top" />
+        android:layout_height="match_parent"
+        android:scaleType="fitXY"/>
 
 </LinearLayout>

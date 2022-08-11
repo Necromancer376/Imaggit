@@ -1,27 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_margin="1dp">
-
-<!--    <FrameLayout-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:background="@drawable/backgroud_starred">-->
-<!--        <ImageView-->
-<!--            android:id="@+id/imgItemStarred"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:background="@drawable/backgroud_starred"-->
-<!--            android:scaleType="fitXY"/>-->
-<!--    </FrameLayout>-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="150dp"
+    android:layout_height="250dp"
+    android:layout_margin="5dp"
+    android:padding="5dp"
+    android:id="@+id/ll_item">
 
     <ImageView
         android:id="@+id/imgItemStarred"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:background="@drawable/backgroud_starred"
-        android:adjustViewBounds="true"
         android:scaleType="fitXY"/>
 
-</RelativeLayout>
+</LinearLayout>
