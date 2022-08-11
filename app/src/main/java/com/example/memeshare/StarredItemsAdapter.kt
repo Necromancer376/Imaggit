@@ -3,6 +3,7 @@ package com.example.memeshare
 import android.content.Context
 import android.content.Intent
 import android.graphics.BitmapFactory
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,7 +12,7 @@ import android.widget.LinearLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_starred.view.*
-import java.net.URL
+
 
 class StarredItemsAdapter(
     private val context: Context,
@@ -39,9 +40,10 @@ class StarredItemsAdapter(
         val currentUrl = list[position]
 //        val image = BitmapFactory.decodeStream(currentUrl.openConnection().getInputStream())
 
+//        Log.e("url", currentUrl)
         picasso
             .load(currentUrl)
-            .error(R.drawable.ic_image_placeholder)
+//            .error(R.drawable.ic_image_placeholder)
             .fit()
             .into(holder.itemView.imgItemStarred)
 
@@ -57,4 +59,9 @@ class StarredItemsAdapter(
         val layout = view.findViewById<LinearLayout>(R.id.ll_item)
     }
 
+    fun logStarred() {
+        for(i in 0..list.size-1) {
+            Log.e(i.toString(), list[i])
+        }
+    }
 }

@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_starred_images.*
@@ -19,9 +20,10 @@ class StarredImagesActivity : AppCompatActivity() {
 
         setupActionBar()
         starredItems = getStarredArray(keyStarred)
+        logStarred()
 
         rv_starred.layoutManager = GridLayoutManager(this@StarredImagesActivity, 2)
-        rv_starred.setHasFixedSize(true)
+//        rv_starred.setHasFixedSize(true)
 
         val adapter = StarredItemsAdapter(this@StarredImagesActivity, starredItems)
         rv_starred.adapter = adapter
@@ -36,7 +38,10 @@ class StarredImagesActivity : AppCompatActivity() {
             actionbar.setHomeAsUpIndicator(R.drawable.ic_back_button_image)
         }
 
-        toolbar_starred_images_activity.setNavigationOnClickListener{ onBackPressed() }
+        toolbar_starred_images_activity.setNavigationOnClickListener{
+            onBackPressed()
+            finish()
+        }
     }
 
     fun saveStarredArray(list: ArrayList<String>, key: String?) {
@@ -62,5 +67,11 @@ class StarredImagesActivity : AppCompatActivity() {
         if (value.isNullOrBlank())
             return defValue
         return ArrayList (value.split(",").map { it })
+    }
+
+    fun logStarred() {
+        for(i in 0..starredItems.size-1) {
+            Log.e(i.toString(), starredItems[i])
+        }
     }
 }
