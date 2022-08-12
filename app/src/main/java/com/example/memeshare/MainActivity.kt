@@ -176,10 +176,4 @@ class MainActivity : AppCompatActivity() {
             return defValue
         return ArrayList (value.split(",").map { it })
     }
-
-    fun logStarred() {
-        for(i in 0..starredItems.size-1) {
-            Log.e(i.toString(), starredItems[i])
-        }
-    }
 }
