@@ -40,6 +40,7 @@ class StarredItemsAdapter(
 
         val currentUrl = list[position]
 
+        Log.e("url", currentUrl)
         Glide
             .with(context)
             .load(currentUrl)

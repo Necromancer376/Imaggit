@@ -25,7 +25,7 @@ class StarredImagesActivity : AppCompatActivity() {
         rv_starred.layoutManager = GridLayoutManager(this@StarredImagesActivity, 2)
 //        rv_starred.setHasFixedSize(true)
 
-        val adapter = StarredItemsAdapter(this@StarredImagesActivity, starredItems)
+        val adapter = StarredItemsAdapter(this@StarredImagesActivity, getStarredArray(keyStarred))
         rv_starred.adapter = adapter
     }
 
