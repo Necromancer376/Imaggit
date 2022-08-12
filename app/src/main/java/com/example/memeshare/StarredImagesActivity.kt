@@ -6,13 +6,12 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_starred_images.*
 
 class StarredImagesActivity : AppCompatActivity() {
 
-    var starredItems = ArrayList<String>()
-    val keyStarred: String = "STARRED"
+    private var starredItems = ArrayList<String>()
+    private val keyStarred: String = "STARRED"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,6 +47,7 @@ class StarredImagesActivity : AppCompatActivity() {
         val sharedPreferences = getSharedPreferences("starredImages", Context.MODE_PRIVATE)
         val editor = sharedPreferences.edit()
         editor.putStringArrayList(key!!, list)
+        editor.apply()
     }
 
     fun getStarredArray(key: String?): ArrayList<String> {

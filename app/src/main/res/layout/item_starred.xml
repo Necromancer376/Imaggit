@@ -10,7 +10,7 @@
         android:id="@+id/imgItemStarred"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/backgroud_starred"
+        android:background="@drawable/background_starred"
         android:scaleType="fitXY"/>
 
 </LinearLayout>

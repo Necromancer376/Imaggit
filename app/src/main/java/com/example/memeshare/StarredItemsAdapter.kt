@@ -40,7 +40,6 @@ class StarredItemsAdapter(
 
         val currentUrl = list[position]
 
-        Log.e("url", currentUrl)
         Glide
             .with(context)
             .load(currentUrl)
@@ -48,26 +47,16 @@ class StarredItemsAdapter(
             .placeholder(R.drawable.ic_image_placeholder)
             .into(holder.itemView.imgItemStarred)
 
-//        picasso
-//            .load(currentUrl)
-//            .fit()
-//            .into(holder.itemView.imgItemStarred)
-
         holder.itemView.ll_item.setOnClickListener {
             val intent = Intent(context,FullImageActivity::class.java)
             intent.putExtra("imgID",currentUrl)
             context.startActivity(intent)
+            (context as StarredImagesActivity).finish()
         }
     }
 
     inner class MyViewHolder(view: View): RecyclerView.ViewHolder(view) {
         val img = view.findViewById<ImageView>(R.id.imgItemStarred)
         val layout = view.findViewById<LinearLayout>(R.id.ll_item)
-    }
-
-    fun logStarred() {
-        for(i in 0..list.size-1) {
-            Log.e(i.toString(), list[i])
-        }
     }
 }

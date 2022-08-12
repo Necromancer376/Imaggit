@@ -1,5 +1,9 @@
 package com.example.memeshare
 
+import android.annotation.SuppressLint
+import android.content.Context
+import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.squareup.picasso.Picasso
@@ -7,12 +11,29 @@ import kotlinx.android.synthetic.main.activity_full_image.*
 import kotlinx.android.synthetic.main.activity_starred_images.*
 
 class FullImageActivity : AppCompatActivity() {
+
+    var currentImageUrl = ""
+    var starredItems = ArrayList<String>()
+    val keyStarred: String = "STARRED"
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_full_image)
 
+        setupActionBar()
+
+        currentImageUrl = intent.getStringExtra("imgID").toString()
         val picasso = Picasso.get()
-        picasso.load(intent.getStringExtra("imgID")).into(imgFull)
+        picasso.load(currentImageUrl).into(imgFull)
+
+        starredItems = getStarredArray(keyStarred)
+
+        btnRemove.setOnClickListener {
+            starredItems.remove(currentImageUrl)
+            saveStarredArray(starredItems, keyStarred)
+            startActivity(Intent(this@FullImageActivity,  StarredImagesActivity::class.java))
+            finish()
+        }
     }
 
     private fun setupActionBar() {
@@ -25,5 +46,32 @@ class FullImageActivity : AppCompatActivity() {
         }
 
         toolbar_full_image_activity.setNavigationOnClickListener{ onBackPressed() }
+    }
+
+    @SuppressLint("CommitPrefEdits")
+    fun saveStarredArray(list: ArrayList<String>, key: String?) {
+        val sharedPreferences = getSharedPreferences("starredImages", Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.putStringArrayList(key!!, list)
+        editor.apply()
+    }
+
+    fun getStarredArray(key: String?): ArrayList<String> {
+        val sharedPreferences = getSharedPreferences("starredImages", Context.MODE_PRIVATE)
+        val defaultArray = ArrayList<String>()
+
+        return sharedPreferences.getStringArrayList(key!!, defaultArray)!!
+    }
+
+    fun SharedPreferences.Editor.putStringArrayList(key: String, list: ArrayList<String>?): SharedPreferences.Editor {
+        putString(key, list?.joinToString(",") ?: "")
+        return this
+    }
+
+    fun SharedPreferences.getStringArrayList(key: String, defValue: ArrayList<String>?): ArrayList<String>? {
+        val value = getString(key, null)
+        if (value.isNullOrBlank())
+            return defValue
+        return ArrayList (value.split(",").map { it })
     }
 }
