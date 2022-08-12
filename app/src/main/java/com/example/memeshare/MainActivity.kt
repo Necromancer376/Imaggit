@@ -48,6 +48,12 @@ class MainActivity : AppCompatActivity() {
         loadMeme()
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+
+        cacheDir.delete()
+    }
+
     private fun setupActionBar() {
 
         setSupportActionBar(toolbar_main_activity)

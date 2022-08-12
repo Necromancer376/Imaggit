@@ -19,7 +19,6 @@ class StarredImagesActivity : AppCompatActivity() {
 
         setupActionBar()
         starredItems = getStarredArray(keyStarred)
-        logStarred()
 
         rv_starred.layoutManager = GridLayoutManager(this@StarredImagesActivity, 2)
         rv_starred.setHasFixedSize(true)
@@ -74,11 +73,5 @@ class StarredImagesActivity : AppCompatActivity() {
         if (value.isNullOrBlank())
             return defValue
         return ArrayList (value.split(",").map { it })
-    }
-
-    fun logStarred() {
-        for(i in 0..starredItems.size-1) {
-            Log.e(i.toString(), starredItems[i])
-        }
     }
 }
