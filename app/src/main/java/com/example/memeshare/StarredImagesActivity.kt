@@ -22,11 +22,18 @@ class StarredImagesActivity : AppCompatActivity() {
         logStarred()
 
         rv_starred.layoutManager = GridLayoutManager(this@StarredImagesActivity, 2)
-//        rv_starred.setHasFixedSize(true)
+        rv_starred.setHasFixedSize(true)
 
         val adapter = StarredItemsAdapter(this@StarredImagesActivity, getStarredArray(keyStarred))
         rv_starred.adapter = adapter
     }
+
+    override fun onResume() {
+        super.onResume()
+
+        starredItems = getStarredArray(keyStarred)
+    }
+
 
     private fun setupActionBar() {
 

@@ -7,7 +7,6 @@ import android.content.SharedPreferences
 import android.graphics.drawable.Drawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
@@ -21,7 +20,6 @@ import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import com.example.sharememes.MySingleton
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlin.math.log
 
 
 class MainActivity : AppCompatActivity() {
@@ -147,6 +145,7 @@ class MainActivity : AppCompatActivity() {
             imgStar.setImageResource(R.drawable.ic_star_hollow)
             starredItems.remove(currentImageUrl)
             toggleStar = false
+            saveStarredArray(starredItems, keyStarred)
         }
     }
 

@@ -6,9 +6,9 @@ import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.squareup.picasso.Picasso
+import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.activity_full_image.*
-import kotlinx.android.synthetic.main.activity_starred_images.*
+
 
 class FullImageActivity : AppCompatActivity() {
 
@@ -23,8 +23,13 @@ class FullImageActivity : AppCompatActivity() {
         setupActionBar()
 
         currentImageUrl = intent.getStringExtra("imgID").toString()
-        val picasso = Picasso.get()
-        picasso.load(currentImageUrl).into(imgFull)
+
+        Glide
+            .with(this)
+            .load(currentImageUrl)
+            .fitCenter()
+            .placeholder(R.drawable.ic_image_placeholder)
+            .into(imgFull)
 
         starredItems = getStarredArray(keyStarred)
 
