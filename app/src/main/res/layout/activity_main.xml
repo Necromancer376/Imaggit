@@ -60,7 +60,9 @@
             android:layout_marginHorizontal="5dp"
             android:selectAllOnFocus="true"
             android:textColor="@color/white"
-            android:singleLine="true"/>
+            android:singleLine="true"
+            android:hint="subreddit name"
+            android:textColorHint="#777777"/>
 
         <ImageView
             android:id="@+id/btnChange"
