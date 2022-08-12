@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_starred.view.*
 
@@ -38,14 +39,18 @@ class StarredItemsAdapter(
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
 
         val currentUrl = list[position]
-//        val image = BitmapFactory.decodeStream(currentUrl.openConnection().getInputStream())
 
-//        Log.e("url", currentUrl)
-        picasso
+        Glide
+            .with(context)
             .load(currentUrl)
-//            .error(R.drawable.ic_image_placeholder)
-            .fit()
+            .fitCenter()
+            .placeholder(R.drawable.ic_image_placeholder)
             .into(holder.itemView.imgItemStarred)
+
+//        picasso
+//            .load(currentUrl)
+//            .fit()
+//            .into(holder.itemView.imgItemStarred)
 
         holder.itemView.ll_item.setOnClickListener {
             val intent = Intent(context,FullImageActivity::class.java)
