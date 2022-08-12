@@ -142,7 +142,6 @@ class MainActivity : AppCompatActivity() {
             starredItems.add(currentImageUrl.toString())
             toggleStar = true
             saveStarredArray(starredItems, keyStarred)
-            logStarred()
         }
         else {
             imgStar.setImageResource(R.drawable.ic_star_hollow)
@@ -151,11 +150,12 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-//    @SuppressLint("CommitPrefEdits")
+    @SuppressLint("CommitPrefEdits")
     fun saveStarredArray(list: ArrayList<String>, key: String?) {
         val sharedPreferences = getSharedPreferences("starredImages", Context.MODE_PRIVATE)
         val editor = sharedPreferences.edit()
         editor.putStringArrayList(key!!, list)
+        editor.apply()
     }
 
     fun getStarredArray(key: String?): ArrayList<String> {
