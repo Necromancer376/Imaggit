@@ -44,7 +44,7 @@ class MainActivity : AppCompatActivity() {
         imgStar.setOnClickListener { addToStarred() }
         edtSubreddit.setSelectAllOnFocus(true)
 
-        
+
         starredItems = getStarredArray(keyStarred)
         loadMeme()
     }
