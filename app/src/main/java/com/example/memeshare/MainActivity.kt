@@ -15,6 +15,7 @@ import com.android.volley.Request
 import com.android.volley.toolbox.JsonObjectRequest
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
@@ -112,7 +113,10 @@ class MainActivity : AppCompatActivity() {
                         progressBar.visibility = View.GONE
                         return false
                     }
-                }).into(imgMeme)
+                })
+                    .diskCacheStrategy(DiskCacheStrategy.NONE)
+                    .skipMemoryCache(true)
+                    .into(imgMeme)
                 imgStar.setImageResource(R.drawable.ic_star_hollow)
                 toggleStar = false
 
