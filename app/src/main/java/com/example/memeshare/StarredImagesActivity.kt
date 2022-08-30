@@ -29,7 +29,6 @@ class StarredImagesActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-
         starredItems = getStarredArray(keyStarred)
     }
 

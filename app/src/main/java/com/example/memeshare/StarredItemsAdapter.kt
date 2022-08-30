@@ -44,7 +44,7 @@ class StarredItemsAdapter(
             val intent = Intent(context,FullImageActivity::class.java)
             intent.putExtra("imgID",currentUrl)
             context.startActivity(intent)
-            (context as StarredImagesActivity).finish()
+//            (context as StarredImagesActivity).finish()
         }
     }
 

@@ -7,6 +7,7 @@ import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import kotlinx.android.synthetic.main.activity_full_image.*
 
 
@@ -28,6 +29,8 @@ class FullImageActivity : AppCompatActivity() {
             .with(this)
             .load(currentImageUrl)
             .fitCenter()
+            .diskCacheStrategy(DiskCacheStrategy.NONE)
+            .skipMemoryCache(true)
             .placeholder(R.drawable.ic_image_placeholder)
             .into(imgFull)
 
