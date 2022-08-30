@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".FullImageActivity"
-    android:background="#111111">
+    android:background="#111111"
+    android:id="@+id/ll_full_image">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar_full_image_activity"
