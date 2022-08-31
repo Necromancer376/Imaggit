@@ -11,7 +11,6 @@ import android.view.MotionEvent
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import kotlinx.android.synthetic.main.activity_full_image.*
-import java.lang.Math.abs
 
 
 class FullImageActivity : AppCompatActivity(), GestureDetector.OnGestureListener {
@@ -19,7 +18,7 @@ class FullImageActivity : AppCompatActivity(), GestureDetector.OnGestureListener
     var currentImageUrl = ""
     var starredItems = ArrayList<String>()
     val keyStarred: String = "STARRED"
-    var pos: Int = 0;
+    var pos: Int = 0
 
     lateinit var gestureDetector: GestureDetector
     var x1: Float = 0.0f
@@ -111,14 +110,13 @@ class FullImageActivity : AppCompatActivity(), GestureDetector.OnGestureListener
         gestureDetector.onTouchEvent(event)
         when(event?.action) {
             0 -> {
-                x1 = event.x;
-                y1 = event.y;
+                x1 = event.x
+                y1 = event.y
             }
             1 -> {
-                x2 = event.x;
-                y2 = event.y;
+                x2 = event.x
+                y2 = event.y
                 val valueX: Float = x2 - x1
-                val valueY: Float = y2 - y1
 
                 if(valueX* -1  > MIN_DISTANCE) {
                     if(pos < starredItems.size-1) {

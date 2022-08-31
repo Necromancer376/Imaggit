@@ -47,23 +47,11 @@ class StarredImagesActivity : AppCompatActivity() {
         }
     }
 
-    fun saveStarredArray(list: ArrayList<String>, key: String?) {
-        val sharedPreferences = getSharedPreferences("starredImages", Context.MODE_PRIVATE)
-        val editor = sharedPreferences.edit()
-        editor.putStringArrayList(key!!, list)
-        editor.apply()
-    }
-
     fun getStarredArray(key: String?): ArrayList<String> {
         val sharedPreferences = getSharedPreferences("starredImages", Context.MODE_PRIVATE)
         val defaultArray = ArrayList<String>()
 
         return sharedPreferences.getStringArrayList(key!!, defaultArray)!!
-    }
-
-    fun SharedPreferences.Editor.putStringArrayList(key: String, list: ArrayList<String>?): SharedPreferences.Editor {
-        putString(key, list?.joinToString(",") ?: "")
-        return this
     }
 
     fun SharedPreferences.getStringArrayList(key: String, defValue: ArrayList<String>?): ArrayList<String>? {

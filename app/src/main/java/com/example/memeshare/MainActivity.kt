@@ -23,6 +23,7 @@ import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import com.example.sharememes.MySingleton
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlin.math.abs
 
 
 class MainActivity : AppCompatActivity(), GestureDetector.OnGestureListener {
@@ -210,7 +211,7 @@ class MainActivity : AppCompatActivity(), GestureDetector.OnGestureListener {
                 y2 = event.y
                 val valueX: Float = x2 - x1
 
-                if(Math.abs(valueX) > FullImageActivity.MIN_DISTANCE) {
+                if(abs(valueX) > FullImageActivity.MIN_DISTANCE) {
                     loadMeme()
                 }
             }
