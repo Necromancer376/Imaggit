@@ -43,12 +43,11 @@ class StarredItemsAdapter(
         holder.itemView.ll_item.setOnClickListener {
             val intent = Intent(context,FullImageActivity::class.java)
             intent.putExtra("imgID",currentUrl)
+            intent.putExtra("pos", position)
             context.startActivity(intent)
 //            (context as StarredImagesActivity).finish()
         }
     }
 
-    inner class MyViewHolder(view: View): RecyclerView.ViewHolder(view) {
-
-    }
+    inner class MyViewHolder(view: View): RecyclerView.ViewHolder(view) { }
 }

@@ -11,6 +11,7 @@ import android.view.MotionEvent
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import kotlinx.android.synthetic.main.activity_full_image.*
+import java.lang.Math.abs
 
 
 class FullImageActivity : AppCompatActivity(), GestureDetector.OnGestureListener {
@@ -18,14 +19,43 @@ class FullImageActivity : AppCompatActivity(), GestureDetector.OnGestureListener
     var currentImageUrl = ""
     var starredItems = ArrayList<String>()
     val keyStarred: String = "STARRED"
+    var pos: Int = 0;
+
+    lateinit var gestureDetector: GestureDetector
+    var x1: Float = 0.0f
+    var x2: Float = 0.0f
+    var y1: Float = 0.0f
+    var y2: Float = 0.0f
+
+    companion object {
+        const val MIN_DISTANCE = 150
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_full_image)
 
         setupActionBar()
+        gestureDetector = GestureDetector(this@FullImageActivity, this@FullImageActivity)
 
-        currentImageUrl = intent.getStringExtra("imgID").toString()
+        starredItems = getStarredArray(keyStarred)
+
+//        currentImageUrl = intent.getStringExtra("imgID").toString()
+        pos = intent.getIntExtra("pos", 0)
+
+        loadImg()
+
+        btnRemove.setOnClickListener {
+            starredItems.remove(currentImageUrl)
+            saveStarredArray(starredItems, keyStarred)
+            startActivity(Intent(this@FullImageActivity,  StarredImagesActivity::class.java))
+            finish()
+        }
+
+    }
+
+    private fun loadImg() {
+        currentImageUrl = starredItems[pos]
 
         Glide
             .with(this)
@@ -35,16 +65,6 @@ class FullImageActivity : AppCompatActivity(), GestureDetector.OnGestureListener
             .skipMemoryCache(true)
             .placeholder(R.drawable.ic_image_placeholder)
             .into(imgFull)
-
-        starredItems = getStarredArray(keyStarred)
-
-        btnRemove.setOnClickListener {
-            starredItems.remove(currentImageUrl)
-            saveStarredArray(starredItems, keyStarred)
-            startActivity(Intent(this@FullImageActivity,  StarredImagesActivity::class.java))
-            finish()
-        }
-
     }
 
     private fun setupActionBar() {
@@ -87,16 +107,47 @@ class FullImageActivity : AppCompatActivity(), GestureDetector.OnGestureListener
     }
 
     // Gesture
+    override fun onTouchEvent(event: MotionEvent?): Boolean {
+        gestureDetector.onTouchEvent(event)
+        when(event?.action) {
+            0 -> {
+                x1 = event.x;
+                y1 = event.y;
+            }
+            1 -> {
+                x2 = event.x;
+                y2 = event.y;
+                val valueX: Float = x2 - x1
+                val valueY: Float = y2 - y1
+
+                if(valueX* -1  > MIN_DISTANCE) {
+                    if(pos < starredItems.size-1) {
+                        pos++
+                        loadImg()
+                    }
+                }
+                else {
+                    if(pos > 0) {
+                        pos--
+                        loadImg()
+                    }
+                }
+            }
+        }
+
+        return super.onTouchEvent(event)
+    }
+
     override fun onDown(p0: MotionEvent?): Boolean {
         return false
     }
 
     override fun onShowPress(p0: MotionEvent?) {
-        TODO("Not yet implemented")
+
     }
 
     override fun onSingleTapUp(p0: MotionEvent?): Boolean {
-        TODO("Not yet implemented")
+        return false
     }
 
     override fun onScroll(p0: MotionEvent?, p1: MotionEvent?, p2: Float, p3: Float): Boolean {
@@ -104,7 +155,7 @@ class FullImageActivity : AppCompatActivity(), GestureDetector.OnGestureListener
     }
 
     override fun onLongPress(p0: MotionEvent?) {
-        TODO("Not yet implemented")
+
     }
 
     override fun onFling(p0: MotionEvent?, p1: MotionEvent?, p2: Float, p3: Float): Boolean {

@@ -7,6 +7,8 @@ import android.content.SharedPreferences
 import android.graphics.drawable.Drawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.GestureDetector
+import android.view.MotionEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
@@ -23,7 +25,7 @@ import com.example.sharememes.MySingleton
 import kotlinx.android.synthetic.main.activity_main.*
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), GestureDetector.OnGestureListener {
 
     val keyStarred: String = "STARRED"
     var currentImageUrl: String? = null
@@ -32,11 +34,22 @@ class MainActivity : AppCompatActivity() {
     var starredItems = ArrayList<String>()
     var toggleStar = false
 
+    lateinit var gestureDetector: GestureDetector
+    var x1: Float = 0.0f
+    var x2: Float = 0.0f
+    var y1: Float = 0.0f
+    var y2: Float = 0.0f
+    companion object {
+        const val MIN_DISTANCE = 150
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         setupActionBar()
+        gestureDetector = GestureDetector(this@MainActivity, this@MainActivity)
+
 
         btnChange.setOnClickListener { chageSubreddit() }
         btnSeeStarred.setOnClickListener {
@@ -185,5 +198,53 @@ class MainActivity : AppCompatActivity() {
         if (value.isNullOrBlank())
             return defValue
         return ArrayList (value.split(",").map { it })
+    }
+
+
+    // Gesture
+    override fun onTouchEvent(event: MotionEvent?): Boolean {
+        gestureDetector.onTouchEvent(event)
+        when(event?.action) {
+            0 -> {
+                x1 = event.x;
+                y1 = event.y;
+            }
+            1 -> {
+                x2 = event.x;
+                y2 = event.y;
+                val valueX: Float = x2 - x1
+                val valueY: Float = y2 - y1
+
+                if(Math.abs(valueX) > FullImageActivity.MIN_DISTANCE) {
+                    loadMeme()
+                }
+            }
+        }
+
+        return super.onTouchEvent(event)
+    }
+
+    override fun onDown(p0: MotionEvent?): Boolean {
+        return false
+    }
+
+    override fun onShowPress(p0: MotionEvent?) {
+
+    }
+
+    override fun onSingleTapUp(p0: MotionEvent?): Boolean {
+        return false
+    }
+
+    override fun onScroll(p0: MotionEvent?, p1: MotionEvent?, p2: Float, p3: Float): Boolean {
+        return false
+    }
+
+    override fun onLongPress(p0: MotionEvent?) {
+
+    }
+
+    override fun onFling(p0: MotionEvent?, p1: MotionEvent?, p2: Float, p3: Float): Boolean {
+        return false
     }
 }
