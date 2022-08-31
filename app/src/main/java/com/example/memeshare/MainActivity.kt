@@ -202,14 +202,13 @@ class MainActivity : AppCompatActivity(), GestureDetector.OnGestureListener {
         gestureDetector.onTouchEvent(event)
         when(event?.action) {
             0 -> {
-                x1 = event.x;
-                y1 = event.y;
+                x1 = event.x
+                y1 = event.y
             }
             1 -> {
-                x2 = event.x;
-                y2 = event.y;
+                x2 = event.x
+                y2 = event.y
                 val valueX: Float = x2 - x1
-                val valueY: Float = y2 - y1
 
                 if(Math.abs(valueX) > FullImageActivity.MIN_DISTANCE) {
                     loadMeme()
