@@ -127,10 +127,9 @@ class FullImageActivity : AppCompatActivity(), GestureDetector.OnGestureListener
                     }
                 }
                 else {
-                    if(pos > 0) {
-                        pos--
-                        loadImg()
-                    }
+                    pos--
+                    if(pos < 0) { pos = 0 }
+                    loadImg()
                 }
             }
         }
