@@ -111,7 +111,8 @@
         <ImageView
             android:id="@+id/btnShare"
             android:layout_width="100dp"
-            android:layout_height="40dp"
+            android:layout_height="60dp"
+            android:paddingVertical="15dp"
             android:paddingHorizontal="30dp"
             android:layout_marginBottom="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -122,7 +123,8 @@
         <ImageView
             android:id="@+id/btnNext"
             android:layout_width="100dp"
-            android:layout_height="40dp"
+            android:layout_height="60dp"
+            android:paddingVertical="10dp"
             android:paddingHorizontal="30dp"
             android:layout_marginBottom="10dp"
             app:layout_constraintBottom_toBottomOf="parent"

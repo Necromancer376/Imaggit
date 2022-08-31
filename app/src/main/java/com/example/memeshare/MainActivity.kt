@@ -50,6 +50,8 @@ class MainActivity : AppCompatActivity(), GestureDetector.OnGestureListener {
         setupActionBar()
         gestureDetector = GestureDetector(this@MainActivity, this@MainActivity)
 
+        btnShare.setOnClickListener { shareMeme() }
+        btnNext.setOnClickListener { nextMeme() }
 
         btnChange.setOnClickListener { chageSubreddit() }
         btnSeeStarred.setOnClickListener {
@@ -144,7 +146,7 @@ class MainActivity : AppCompatActivity(), GestureDetector.OnGestureListener {
         MySingleton.getInstance(this).addToRequestQueue(jsonObjectRequest)
     }
 
-    fun shareMeme(view: android.view.View) {
+    fun shareMeme() {
 
         val intent = Intent(Intent.ACTION_SEND)
         intent.type = "text/plain"
@@ -153,7 +155,7 @@ class MainActivity : AppCompatActivity(), GestureDetector.OnGestureListener {
         startActivity(chooser)
     }
 
-    fun nextMeme(view: android.view.View) {
+    fun nextMeme() {
         loadMeme()
     }
 
