@@ -74,12 +74,6 @@ class MainActivity : AppCompatActivity(), GestureDetector.OnGestureListener {
     private fun setupActionBar() {
 
         setSupportActionBar(toolbar_main_activity)
-        val actionbar = supportActionBar
-        if(actionbar != null) {
-            actionbar.setDisplayHomeAsUpEnabled(true)
-            actionbar.setHomeAsUpIndicator(R.drawable.ic_back_button_image)
-        }
-        toolbar_main_activity.setNavigationOnClickListener{ onBackPressed() }
     }
 
     private fun chageSubreddit() {
