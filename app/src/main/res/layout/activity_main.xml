@@ -50,7 +50,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:paddingHorizontal="10dp"
-        android:layout_margin="10dp" >
+        android:layout_margin="10dp"
+        android:background="@drawable/inputbox_background">
 
         <EditText
             android:id="@+id/edtSubreddit"
@@ -107,35 +108,27 @@
         android:indeterminateTintMode="src_atop"
         android:indeterminateTint="#ddfa39"/>
 
-        <Button
+        <ImageView
             android:id="@+id/btnShare"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:onClick="shareMeme"
-            android:paddingHorizontal="32dp"
-            android:paddingVertical="20dp"
-            android:text="@string/share"
-            android:textAlignment="center"
-            android:textColor="@color/black"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:paddingHorizontal="30dp"
+            android:layout_marginBottom="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toLeftOf="@+id/guideline"
-            android:background="@drawable/button_background" />
+            android:src="@drawable/ic_btn_share"/>
 
-        <Button
+        <ImageView
             android:id="@+id/btnNext"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:onClick="nextMeme"
-            android:paddingHorizontal="32dp"
-            android:paddingVertical="20dp"
-            android:text="@string/next"
-            android:textAlignment="center"
-            android:textColor="@color/black"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:paddingHorizontal="30dp"
+            android:layout_marginBottom="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toRightOf="@+id/guideline"
             app:layout_constraintRight_toRightOf="parent"
-            android:background="@drawable/button_background" />
+            android:src="@drawable/ic_btn_next"/>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
@@ -145,3 +138,34 @@
         app:layout_constraintGuide_percent="0.50121653" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <!--        <Button-->
+    <!--            android:id="@+id/btnShare"-->
+    <!--            android:layout_width="0dp"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:onClick="shareMeme"-->
+    <!--            android:paddingHorizontal="32dp"-->
+    <!--            android:paddingVertical="20dp"-->
+    <!--            android:text="@string/share"-->
+    <!--            android:textAlignment="center"-->
+    <!--            android:textColor="@color/black"-->
+    <!--            app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--            app:layout_constraintLeft_toLeftOf="parent"-->
+    <!--            app:layout_constraintRight_toLeftOf="@+id/guideline"-->
+    <!--            android:background="@drawable/button_background" />-->
+
+    <!--        <Button-->
+    <!--            android:id="@+id/btnNext"-->
+    <!--            android:layout_width="0dp"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:onClick="nextMeme"-->
+    <!--            android:paddingHorizontal="32dp"-->
+    <!--            android:paddingVertical="20dp"-->
+    <!--            android:text="@string/next"-->
+    <!--            android:textAlignment="center"-->
+    <!--            android:textColor="@color/black"-->
+    <!--            app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--            app:layout_constraintLeft_toRightOf="@+id/guideline"-->
+    <!--            app:layout_constraintRight_toRightOf="parent"-->
+    <!--            android:background="@drawable/button_background" />-->
