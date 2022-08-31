@@ -50,8 +50,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:paddingHorizontal="10dp"
-        android:layout_margin="10dp"
-        android:background="@drawable/inputbox_background">
+        android:layout_margin="10dp">
 
         <EditText
             android:id="@+id/edtSubreddit"
