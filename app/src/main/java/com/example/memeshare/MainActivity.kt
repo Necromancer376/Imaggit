@@ -260,4 +260,7 @@ class MainActivity : AppCompatActivity(), GestureDetector.OnGestureListener, Vie
         return false
     }
 
+    override fun onClick(p0: View?) {
+    }
+
 }
