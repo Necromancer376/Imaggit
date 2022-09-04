@@ -7,14 +7,12 @@ import android.content.SharedPreferences
 import android.graphics.drawable.Drawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Handler
 import android.view.GestureDetector
 import android.view.MotionEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
 import android.widget.ProgressBar
-import android.widget.Toast
 import com.android.volley.Request
 import com.android.volley.toolbox.JsonObjectRequest
 import com.bumptech.glide.Glide
@@ -228,7 +226,7 @@ class MainActivity : AppCompatActivity(), GestureDetector.OnGestureListener, Vie
                 y2 = event.y
                 val valueX: Float = x2 - x1
 
-                if(abs(valueX) > FullImageActivity.MIN_DISTANCE) {
+                if(abs(valueX) > MainActivity.MIN_DISTANCE) {
                     loadMeme()
                 }
             }

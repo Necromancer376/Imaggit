@@ -25,10 +25,8 @@ class FullImageActivity : AppCompatActivity(), GestureDetector.OnGestureListener
     var x2: Float = 0.0f
     var y1: Float = 0.0f
     var y2: Float = 0.0f
-
-    companion object {
-        const val MIN_DISTANCE = 150
-    }
+    val MIN_DISTANCE = 150
+    val MAX_DISTANCE = -150
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,7 +37,6 @@ class FullImageActivity : AppCompatActivity(), GestureDetector.OnGestureListener
 
         starredItems = getStarredArray(keyStarred)
 
-//        currentImageUrl = intent.getStringExtra("imgID").toString()
         pos = intent.getIntExtra("pos", 0)
 
         loadImg()
@@ -118,13 +115,13 @@ class FullImageActivity : AppCompatActivity(), GestureDetector.OnGestureListener
                 y2 = event.y
                 val valueX: Float = x2 - x1
 
-                if(valueX* -1  > MIN_DISTANCE) {
+                if(valueX  < MAX_DISTANCE) {
                     if(pos < starredItems.size-1) {
                         pos++
                         loadImg()
                     }
                 }
-                else {
+                else if(valueX > MIN_DISTANCE) {
                     pos--
                     if(pos < 0) { pos = 0 }
                     loadImg()
