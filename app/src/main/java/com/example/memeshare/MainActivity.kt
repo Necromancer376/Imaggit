@@ -7,12 +7,14 @@ import android.content.SharedPreferences
 import android.graphics.drawable.Drawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import android.view.GestureDetector
 import android.view.MotionEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
 import android.widget.ProgressBar
+import android.widget.Toast
 import com.android.volley.Request
 import com.android.volley.toolbox.JsonObjectRequest
 import com.bumptech.glide.Glide
@@ -26,7 +28,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlin.math.abs
 
 
-class MainActivity : AppCompatActivity(), GestureDetector.OnGestureListener {
+class MainActivity : AppCompatActivity(), GestureDetector.OnGestureListener, View.OnClickListener {
 
     val keyStarred: String = "STARRED"
     var currentImageUrl: String? = null
@@ -34,6 +36,7 @@ class MainActivity : AppCompatActivity(), GestureDetector.OnGestureListener {
     var subreddit = ""
     var starredItems = ArrayList<String>()
     var toggleStar = false
+    var doubleTap = false
 
     lateinit var gestureDetector: GestureDetector
     var x1: Float = 0.0f
@@ -61,10 +64,24 @@ class MainActivity : AppCompatActivity(), GestureDetector.OnGestureListener {
         imgStar.setOnClickListener { addToStarred() }
         edtSubreddit.setSelectAllOnFocus(true)
 
-
         starredItems = getStarredArray(keyStarred)
         loadMeme()
     }
+
+//    override fun onClick(v: View) {
+//        var r = object: Runnable {
+//            override fun run() { doubleTap = false }
+//        }
+//        if(doubleTap) {
+//            addToStarred()
+//            doubleTap = false
+//        }
+//        else {
+//            doubleTap = true
+//            var handler = Handler()
+//            handler.postDelayed(r, 500)
+//        }
+//    }
 
     override fun onDestroy() {
         super.onDestroy()
@@ -239,8 +256,8 @@ class MainActivity : AppCompatActivity(), GestureDetector.OnGestureListener {
     override fun onLongPress(p0: MotionEvent?) {
 
     }
-
     override fun onFling(p0: MotionEvent?, p1: MotionEvent?, p2: Float, p3: Float): Boolean {
         return false
     }
+
 }
