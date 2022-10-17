@@ -4,10 +4,10 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
-import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import android.view.GestureDetector
 import android.view.MotionEvent
 import android.view.View
@@ -25,6 +25,9 @@ import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import com.example.sharememes.MySingleton
 import kotlinx.android.synthetic.main.activity_main.*
+import java.util.*
+import kotlin.collections.ArrayList
+import kotlin.concurrent.schedule
 import kotlin.math.abs
 
 
@@ -56,16 +59,20 @@ class MainActivity : AppCompatActivity(), GestureDetector.OnGestureListener, Vie
 
         btnShare.setOnClickListener {
             shareMeme()
-//            buttonEffect(btnShare)
+            buttonEffect(btnShare)
         }
         btnNext.setOnClickListener {
             nextMeme()
-//            buttonEffect(btnNext)
+//            Timer().schedule(2000) {
+//                btnNext.setBackgroundResource(R.color.white) //set the color to black
+//                Log.e("set", "background")
+//            }
+            buttonEffect(btnNext)
         }
 
         btnChange.setOnClickListener {
             chageSubreddit()
-//            buttonEffect(btnChange)
+            buttonEffect(btnChange)
         }
         btnSeeStarred.setOnClickListener {
             startActivity(Intent(this@MainActivity,  StarredImagesActivity::class.java))
@@ -223,22 +230,26 @@ class MainActivity : AppCompatActivity(), GestureDetector.OnGestureListener, Vie
         return ArrayList (value.split(",").map { it })
     }
 
-//    @SuppressLint("ClickableViewAccessibility")
-//    fun buttonEffect(button: View) {
-//        button.setOnTouchListener { v, event ->
-//            when (event.action) {
-//                MotionEvent.ACTION_DOWN -> {
-//                    v.background.setColorFilter( 0xffffff, PorterDuff.Mode.SRC_ATOP)
-//                    v.invalidate()
-//                }
-//                MotionEvent.ACTION_UP -> {
-//                    v.background.clearColorFilter()
-//                    v.invalidate()
-//                }
-//            }
-//            false
-//        }
-//    }
+    @SuppressLint("ClickableViewAccessibility")
+    fun buttonEffect(button: View) {
+        button.setOnTouchListener { v, event ->
+            when (event.action) {
+                MotionEvent.ACTION_DOWN -> {
+                    val handler = Handler()
+                    handler.postDelayed({
+                        v.setBackgroundResource(R.color.white) //set the color to black
+                        Log.e("set", "background")
+                    }, 2000)
+                    v.invalidate()
+                }
+                MotionEvent.ACTION_UP -> {
+                    v.background.clearColorFilter()
+                    v.invalidate()
+                }
+            }
+            false
+        }
+    }
 
 
     // Gesture
@@ -286,8 +297,7 @@ class MainActivity : AppCompatActivity(), GestureDetector.OnGestureListener, Vie
         return false
     }
 
-    override fun onClick(view: View?) {
+    override fun onClick(view: View) {
 
     }
-
 }
