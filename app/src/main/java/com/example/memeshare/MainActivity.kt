@@ -4,15 +4,17 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.graphics.Color
 import android.graphics.drawable.Drawable
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import android.view.GestureDetector
 import android.view.MotionEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
 import android.widget.ProgressBar
+import androidx.appcompat.app.AppCompatActivity
 import com.android.volley.Request
 import com.android.volley.toolbox.JsonObjectRequest
 import com.bumptech.glide.Glide
@@ -52,10 +54,19 @@ class MainActivity : AppCompatActivity(), GestureDetector.OnGestureListener, Vie
         setupActionBar()
         gestureDetector = GestureDetector(this@MainActivity, this@MainActivity)
 
-        btnShare.setOnClickListener { shareMeme() }
-        btnNext.setOnClickListener { nextMeme() }
+        btnShare.setOnClickListener {
+            shareMeme()
+//            buttonEffect(btnShare)
+        }
+        btnNext.setOnClickListener {
+            nextMeme()
+//            buttonEffect(btnNext)
+        }
 
-        btnChange.setOnClickListener { chageSubreddit() }
+        btnChange.setOnClickListener {
+            chageSubreddit()
+//            buttonEffect(btnChange)
+        }
         btnSeeStarred.setOnClickListener {
             startActivity(Intent(this@MainActivity,  StarredImagesActivity::class.java))
         }
@@ -212,6 +223,23 @@ class MainActivity : AppCompatActivity(), GestureDetector.OnGestureListener, Vie
         return ArrayList (value.split(",").map { it })
     }
 
+//    @SuppressLint("ClickableViewAccessibility")
+//    fun buttonEffect(button: View) {
+//        button.setOnTouchListener { v, event ->
+//            when (event.action) {
+//                MotionEvent.ACTION_DOWN -> {
+//                    v.background.setColorFilter( 0xffffff, PorterDuff.Mode.SRC_ATOP)
+//                    v.invalidate()
+//                }
+//                MotionEvent.ACTION_UP -> {
+//                    v.background.clearColorFilter()
+//                    v.invalidate()
+//                }
+//            }
+//            false
+//        }
+//    }
+
 
     // Gesture
     override fun onTouchEvent(event: MotionEvent?): Boolean {
@@ -258,7 +286,8 @@ class MainActivity : AppCompatActivity(), GestureDetector.OnGestureListener, Vie
         return false
     }
 
-    override fun onClick(p0: View?) {
+    override fun onClick(view: View?) {
+
     }
 
 }
