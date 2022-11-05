@@ -59,7 +59,7 @@ class MainActivity : AppCompatActivity(), GestureDetector.OnGestureListener, Vie
 
         btnShare.setOnClickListener {
             shareMeme()
-            buttonEffect(btnShare)
+//            buttonEffect(btnShare)
         }
         btnNext.setOnClickListener {
             nextMeme()
@@ -67,12 +67,12 @@ class MainActivity : AppCompatActivity(), GestureDetector.OnGestureListener, Vie
 //                btnNext.setBackgroundResource(R.color.white) //set the color to black
 //                Log.e("set", "background")
 //            }
-            buttonEffect(btnNext)
+//            buttonEffect(btnNext)
         }
 
         btnChange.setOnClickListener {
             chageSubreddit()
-            buttonEffect(btnChange)
+//            buttonEffect(btnChange)
         }
         btnSeeStarred.setOnClickListener {
             startActivity(Intent(this@MainActivity,  StarredImagesActivity::class.java))
