@@ -127,7 +127,8 @@ class MainActivity : AppCompatActivity(), GestureDetector.OnGestureListener, Vie
 
         val imgMeme = findViewById<ImageView>(R.id.imgMeme)
         // Instantiate the RequestQueue.
-        val url = "https://meme-api.herokuapp.com/gimme/$subreddit"
+        val url = "https://meme-api.com/gimme/$subreddit"
+        Log.i("url", url)
 
         // Request a string response from the provided URL.
         val jsonObjectRequest = JsonObjectRequest(
