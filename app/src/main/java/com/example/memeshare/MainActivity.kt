@@ -24,6 +24,7 @@ import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import com.example.sharememes.MySingleton
+import kotlinx.android.synthetic.main.activity_full_image.*
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 import kotlin.collections.ArrayList
@@ -40,6 +41,9 @@ class MainActivity : AppCompatActivity(), GestureDetector.OnGestureListener, Vie
     var starredItems = ArrayList<String>()
     var toggleStar = false
     var doubleTap = false
+
+    var imgList: MutableList<String> = mutableListOf()
+    var pointer = 0
 
     lateinit var gestureDetector: GestureDetector
     var x1: Float = 0.0f
@@ -62,6 +66,7 @@ class MainActivity : AppCompatActivity(), GestureDetector.OnGestureListener, Vie
 //            buttonEffect(btnShare)
         }
         btnNext.setOnClickListener {
+            pointer = 0
             nextMeme()
 //            Timer().schedule(2000) {
 //                btnNext.setBackgroundResource(R.color.white) //set the color to black
@@ -135,6 +140,8 @@ class MainActivity : AppCompatActivity(), GestureDetector.OnGestureListener, Vie
             Request.Method.GET, url, null,
             { responce ->
                 currentImageUrl = responce.getString("url")
+                imgList.add(0, currentImageUrl.toString())
+                Log.e("list", imgList.toString())
                 Glide.with(this).load(currentImageUrl).listener(object: RequestListener<Drawable> {
 
                     override fun onLoadFailed(
@@ -231,6 +238,19 @@ class MainActivity : AppCompatActivity(), GestureDetector.OnGestureListener, Vie
         return ArrayList (value.split(",").map { it })
     }
 
+    private fun loadMemeList() {
+
+        val imgListUrl = imgList.get(pointer)
+
+        Glide
+            .with(this)
+            .load(imgListUrl)
+            .fitCenter()
+            .diskCacheStrategy(DiskCacheStrategy.NONE)
+            .skipMemoryCache(true)
+            .into(imgMeme)
+    }
+
     @SuppressLint("ClickableViewAccessibility")
     fun buttonEffect(button: View) {
         button.setOnTouchListener { v, event ->
@@ -266,8 +286,22 @@ class MainActivity : AppCompatActivity(), GestureDetector.OnGestureListener, Vie
                 y2 = event.y
                 val valueX: Float = x2 - x1
 
-                if(abs(valueX) > MainActivity.MIN_DISTANCE) {
-                    loadMeme()
+                if(valueX >= MIN_DISTANCE) {
+                    Log.e("dir", "left")
+                    if(imgList.size - 1 > pointer)
+                        pointer++;
+                    Log.e("pointer", pointer.toString())
+                    loadMemeList()
+                }
+                else if(valueX <= -MIN_DISTANCE) {
+                    Log.e("dir", "right")
+                    if(pointer == 0)
+                        loadMeme()
+                    else {
+                        if(pointer != 0)
+                            pointer--;
+                        loadMemeList()
+                    }
                 }
             }
         }
